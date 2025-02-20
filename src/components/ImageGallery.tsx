@@ -3,7 +3,7 @@ import style from "./ImageGallery.module.css";
 
 interface ImageItem {
   id: string;
-  urls: { small: string; regular: string };
+  urls: { small?: string; regular: string };
   alt_description: string;
 }
 
@@ -17,7 +17,12 @@ const ImageGallery = ({ resultList, onImageClick }: ImageGalleryProps) => {
     <ul className={style.list}>
       {resultList.map((elem) => (
         <li key={elem.id}>
-          <ImageCard elem={elem} onImageClick={onImageClick} />
+          <ImageCard
+            src={elem.urls.small || elem.urls.regular}
+            alt={elem.alt_description || "No description"}
+            elem={elem}
+            onImageClick={onImageClick}
+          />
         </li>
       ))}
     </ul>
