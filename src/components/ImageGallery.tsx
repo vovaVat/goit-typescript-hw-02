@@ -1,8 +1,14 @@
 import ImageCard from "./ImageCard";
 import style from "./ImageGallery.module.css";
 
+interface ImageItem {
+  id: string;
+  urls: { small: string; regular: string };
+  alt_description: string;
+}
+
 interface ImageGalleryProps {
-  resultList: Image[];
+  resultList: ImageItem[];
   onImageClick: (src: string, alt: string) => void;
 }
 
@@ -11,12 +17,7 @@ const ImageGallery = ({ resultList, onImageClick }: ImageGalleryProps) => {
     <ul className={style.list}>
       {resultList.map((elem) => (
         <li key={elem.id}>
-          <ImageCard
-            src={elem.urls.small}
-            alt={elem.alt_description}
-            elem={elem}
-            onImageClick={onImageClick}
-          />
+          <ImageCard elem={elem} onImageClick={onImageClick} />
         </li>
       ))}
     </ul>
