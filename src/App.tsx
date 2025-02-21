@@ -7,7 +7,8 @@ import ErrorMessage from "./components/ErrorMessage";
 import LoadMoreButton from "./components/LoadMoreButton";
 import ImageModal from "./components/ImageModal";
 
-interface Image {
+interface ImageData {
+  // ✅ Исправлено название интерфейса
   id: string;
   urls: {
     regular: string;
@@ -19,7 +20,7 @@ const ACCESS_KEY = "8wSe26Bt4kGOKyc2olibwR4F1t4-6PNqlbaOx0Pz3kg";
 
 function App() {
   const [inp, setInp] = useState<string>("");
-  const [result, setResult] = useState<Image[]>([]);
+  const [result, setResult] = useState<ImageData[]>([]); // ✅ Используем новое имя интерфейса
   const [error, setError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [page, setPage] = useState<number>(0);
@@ -37,7 +38,7 @@ function App() {
         try {
           setLoading(true);
           const response = await axios.get<{
-            results: Image[];
+            results: ImageData[];
             total_pages: number;
           }>(`https://api.unsplash.com/search/photos`, {
             params: {
